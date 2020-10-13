@@ -10,9 +10,9 @@
     </main>
 
     <div class="fixed-action-btn">
-      <a class="btn-floating btn-large blue" href="#">
+      <router-link class="btn-floating btn-large blue" to="/record">
         <i class="large material-icons">add</i>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -26,8 +26,14 @@ export default {
   components: { Navbar, Sidebar },
   data() {
     return {
-      isOpen: true
+      isOpen: true,
     };
-  }
+  },
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch("fetchInfo");
+    }
+    console.log(Object.keys(this.$store.getters.info));
+  },
 };
 </script>
